@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { StatusBar, Platform, Button, ScrollView, TextInput, Image, StyleSheet, Text, View, Dimensions, TouchableOpacity } from 'react-native';
 import DatePicker from 'react-native-datepicker';
+import WebServiceHandler from 'react-native-web-service-handler';
 
 export default class Register extends Component {
   constructor(props) {
@@ -29,6 +30,15 @@ export default class Register extends Component {
       }
     }
 
+    async performRegistration() {
+      await WebServiceHandler.post('https://0l6uyhjowi.execute-api.eu-central-1.amazonaws.com/dev/users',{'Content-Type': 'application/json'},{'name':'Jith', 'email':'jj@gmail.com'})
+       .then((val)=>{
+         console.log('Success');
+         console.log('callapi: ' + JSON.stringify(val));
+       })
+       .catch((error) => console.log('callapi Fail:'+ JSON.stringify(error)));
+    }
+
     _onPress = () => {
       console.log(this.state.firstName);
       if (this.state.firstName == null || this.state.firstName == '') {
@@ -40,6 +50,7 @@ export default class Register extends Component {
         this.setState ({
           hasError: false
         });
+        return this.performRegistration();
       }
     };
 

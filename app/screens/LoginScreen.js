@@ -62,7 +62,7 @@ export default class LoginScreen extends Component {
     // };
 
   async loginService() {
-    let url = 'https://jsonplaceholder.typicode.com/todos/1'
+    let url = 'https://0l6uyhjowi.execute-api.eu-central-1.amazonaws.com/dev/users'
 
     try {
       let response = await fetch (url);
